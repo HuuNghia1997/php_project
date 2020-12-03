@@ -32,6 +32,7 @@ class Bills
         $sqlQuery = "SELECT DonHang_id, TongTien, NgayDat, TrangThai, NhanVien_id,KhuyenMai_id,KhachHang_id,TenKhachHang
          FROM " . $this->db_table . "limit " . $this->size . " offset " . $this->page . "";
         $this->result = $this->db->query($sqlQuery);
+        //them 1 dong comment
         return $this->result;
     }
 
