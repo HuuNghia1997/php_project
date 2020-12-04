@@ -28,11 +28,10 @@ class Bills
     // GET ALL
     public function getBills()
     {
-
-        $sqlQuery = "SELECT DonHang_id, TongTien, NgayDat, TrangThai, NhanVien_id,KhuyenMai_id,KhachHang_id,TenKhachHang
-         FROM " . $this->db_table . "limit " . $this->size . " offset " . $this->page . "";
+        $sqlQuery = "SELECT *
+         FROM " . $this->db_table . " LIMIT " . $this->size . " OFFSET " . $this->page . "
+         ";
         $this->result = $this->db->query($sqlQuery);
-        //them 1 dong comment
         return $this->result;
     }
 
