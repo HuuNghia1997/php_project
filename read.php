@@ -7,7 +7,8 @@ $database = new Database();
 $db = $database->getConnection();
 $size = isset($_GET['size']) ? $_GET['size'] : 10;
 $page = isset($_GET['page']) ?  $_GET['page'] : 0;
-$items = new Bills($db, $size, $page);
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : null;
+$items = new Bills($db, $size, $page, $keyword);
 $records = $items->getBills();
 $itemCount = $records->num_rows;
 if ($itemCount > 0) {
