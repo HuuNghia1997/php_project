@@ -5,10 +5,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 include_once './connection.php';
-include_once './employee.php';
+include_once './login_employee.php';
 $database = new Database();
 $db = $database->getConnection();
-$items = new \Users($db);
+$items = new Users($db);
 $items->TaiKhoan = isset($_GET['TaiKhoan']) ? $_GET['TaiKhoan'] : "null";
 $items->PassWord = isset($_GET['PassWord']) ? $_GET['PassWord'] : "null";
 if($items->login()){

@@ -21,6 +21,7 @@ $item->TrangThai = $_GET['TrangThai'];
 $item->KhuyenMai_id = $_GET['KhuyenMai_id'];
 $item->NhanVien_id = $_GET['NhanVien_id'];
 $item->KhachHang_id = $_GET['KhachHang_id'];
+$item->TenKhachHang = $_GET['TenKhachHang'];
 if($item->updateBills()){
     echo json_encode(
         array("message" => "Cập nhật đơn hàng thành công")

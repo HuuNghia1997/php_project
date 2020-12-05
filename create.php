@@ -18,6 +18,7 @@ $items->TrangThai = $_GET['TrangThai'];
 $items->KhuyenMai_id = $_GET['KhuyenMai_id'];
 $items->NhanVien_id = $_GET['NhanVien_id'];
 $items->KhachHang_id = $_GET['KhachHang_id'];
+$items->TenKhachHang = $_GET['TenKhachHang'];
 if($items->createBills()){
     echo json_encode(
         array("message" => "Tạo đơn hàng thành công")

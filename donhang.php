@@ -44,6 +44,15 @@ class Bills
             return $this->result;
         }
     }
+    //get one
+    public function getOneBill()
+    {
+        $sqlQuery = "SELECT *  FROM " . $this->db_table . " WHERE DonHang_id = " . $this->id;
+        $this->result = $this->db->query($sqlQuery);
+        if ($this->db->affected_rows > 0) {
+            return $this->result;
+        }
+    }
 
     // CREATE
     public function createBills()
@@ -55,14 +64,15 @@ class Bills
         $this->NhanVien_id = htmlspecialchars(strip_tags($this->NhanVien_id));
         $this->KhuyenMai_id = htmlspecialchars(strip_tags($this->KhuyenMai_id));
         $this->KhachHang_id = htmlspecialchars(strip_tags($this->KhachHang_id));
-   
+        $this->TenKhachHang = htmlspecialchars(strip_tags($this->TenKhachHang));
         $sqlQuery = "INSERT INTO
             " . $this->db_table . " SET donhang.TongTien = " . $this->TongTien . ",
             donhang.NgayDat = '" . $this->NgayDat . "',
             donhang.TrangThai = " . $this->TrangThai . ",
             donhang.NhanVien_id = " . $this->NhanVien_id . ",
             donhang.KhuyenMai_id = " . $this->KhuyenMai_id . ",
-            donhang.KhachHang_id = " . $this->KhachHang_id . "
+            donhang.KhachHang_id = " . $this->KhachHang_id . ",
+            donhang.TenKhachHang = '" . $this->TenKhachHang . "'
              ";
         $this->db->query($sqlQuery);
         if ($this->db->affected_rows > 0) {
@@ -79,13 +89,14 @@ class Bills
         $this->NhanVien_id = htmlspecialchars(strip_tags($this->NhanVien_id));
         $this->KhuyenMai_id = htmlspecialchars(strip_tags($this->KhuyenMai_id));
         $this->KhachHang_id = htmlspecialchars(strip_tags($this->KhachHang_id));
-
+        $this->TenKhachHang = htmlspecialchars(strip_tags($this->TenKhachHang));
         $sqlQuery = "UPDATE  " . $this->db_table . " SET donhang.TongTien = " . $this->TongTien . ",
         donhang.NgayDat = '" . $this->NgayDat . "',
         donhang.TrangThai = " . $this->TrangThai . ",
         donhang.NhanVien_id = " . $this->NhanVien_id . ",
         donhang.KhuyenMai_id = " . $this->KhuyenMai_id . ",
-        donhang.KhachHang_id = " . $this->KhachHang_id . "
+        donhang.KhachHang_id = " . $this->KhachHang_id . ",
+        donhang.TenKhachHang = '" . $this->TenKhachHang . "'
         WHERE DonHang_id = " . $this->id;
         $this->db->query($sqlQuery);
         if ($this->db->affected_rows > 0) {

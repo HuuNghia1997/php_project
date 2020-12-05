@@ -12,15 +12,21 @@ $size = null;
 $page = null;
 $keyword = null;
 $item = new Bills($db,$size,$page,$keyword);
-
 $item->id = isset($_GET['id']) ? $_GET['id'] : die();
-
-if($item->deleteBills()){
+$records = $item->getOneBill();
+$itemCount = $records->num_rows;
+if ($itemCount > 0) {
+    $billsArr = array();
+    $billsArr["body"] = array();
+    $billsArr["itemCount"] = $itemCount;
+    while ($row = $records->fetch_assoc()) {
+        array_push($billsArr["body"], $row);
+    }
+    echo json_encode($billsArr);
+} else {
+    http_response_code(404);
     echo json_encode(
-        array("message" => "Xóa đơn hàng thành công")
-    );
-} else{
-    echo json_encode(
-        array("message" => "Xóa đơn hàng thành công")
+        array("message" => "No record found.")
     );
 }
+?>
