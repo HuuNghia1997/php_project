@@ -1,0 +1,23 @@
+login Admin: http://localhost/huunghia/phpAdmin/loginAdmin.php?TaiKhoan=admin&PassWord=123456
+login nhân viên: http://localhost/huunghia/phpAdmin/loginEmployee.php?TaiKhoan=nhanvien&PassWord=123456
+
+bảng khách hàng:
+get danh sách khách hàng: http://localhost/huunghia/phpAdmin/read_custommer.php
+get detail khách hàng: http://localhost/huunghia/phpAdmin/read_one_custommer.php?id=1
+put khách hàng: http://localhost/huunghia/phpAdmin/update_custommer.php?id=1&HoTen=văn ngọc
+
+
+bảng nhân viên:
+get danh sách nhân viên: http://localhost/huunghia/phpAdmin/read_employees.php
+get detail nhân viên: http://localhost/huunghia/phpAdmin/read_one_employees.php?id=1
+put nhân viên: http://localhost/huunghia/phpAdmin/update_employees.php?id=1&HoTen=nhân viên
+
+bảng đơn hàng: http://localhost/huunghia/phpAdmin/read.php?keyword=tr&page=0&size=1
+keyword là tìm tên khách hàng .....
+post đơn hàng: http://localhost/huunghia/phpAdmin/create.php?TongTien=88&TrangThai=1&NhanVien_id=1&KhuyenMai_id=Null&KhachHang_id=1&TenKhachHang=tr
+chú ý: phi chuẩn hóa qua bảng khách hàng lấy tên khách hàng post vào đơn hàng để lưu lại...nhân viên cũng vậy
+put đơn hàng: http://localhost/huunghia/phpAdmin/update.php?TongTien=777&TrangThai=1&NhanVien_id=1&KhuyenMai_id=Null&KhachHang_id=1&TenKhachHang=tr&id=23
+delete đơn hàng: http://localhost/huunghia/phpAdmin/delete.php?id=22
+detail: http://localhost/huunghia/phpAdmin/read_one_bill.php?id=21
+
+
