@@ -20,4 +20,23 @@ put đơn hàng: http://localhost/huunghia/phpAdmin/update.php?TongTien=777&Tran
 delete đơn hàng: http://localhost/huunghia/phpAdmin/delete.php?id=22
 detail: http://localhost/huunghia/phpAdmin/read_one_bill.php?id=21
 
+bảng món: 
+getALL: http://localhost/huunghia/phpAdmin/read_product.php?page=0&size=1&keyword=Cà Phê Đen
+getDetail: http://localhost/huunghia/phpAdmin/read_one_product.php?id=1
+post: http://localhost/huunghia/phpAdmin/create_product.php?TenMon=Cà Phê Đen 2&MoTa=abd&Gia=29000&LoaiMon_id=1
+hàm post xong trả về id để post hình ảnh..
+put: http://localhost/huunghia/phpAdmin/update_product.php?id=1&TenMon=Cà Phê Đen &MoTa=abd&Gia=29000&LoaiMon_id=1
+delete: http://localhost/huunghia/phpAdmin/delete_product.php?id=26
+Loại món cần phi chuẩn hóa sang bảng loại món
 
+Bảng loại món:
+getALL: http://localhost/huunghia/phpAdmin/read_category_product.php?page=0&size=5&keyword=cafe
+
+bảng hình món: 
+getALL: http://localhost/huunghia/phpAdmin/read_image.php
+getone: http://localhost/huunghia/phpAdmin/read_one_image.php?HinhMon_id=21 
+hàm post: http://localhost/huunghia/phpAdmin/create_image.php
+gửi form-data: image và Mon_id
+hàm put: http://localhost/huunghia/phpAdmin/update_image.php
+gửi form-data: image và HinhMon_id
+delete: http://localhost/huunghia/phpAdmin/delete_image.php?id=26

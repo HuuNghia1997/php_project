@@ -32,7 +32,7 @@ class Bills
     {
         if ($this->keyword !== null) {
             $sqlQuery = "SELECT *
-            FROM " . $this->db_table . " WHERE  donhang.TenKhachHang= '" . $this->keyword . "' LIMIT " . $this->size . " OFFSET " . $this->page . "
+            FROM " . $this->db_table . " WHERE  donhang.TenKhachHang like '%" . $this->keyword . "%' LIMIT " . $this->size . " OFFSET " . $this->page . "
             ";
             $this->result = $this->db->query($sqlQuery);
             return $this->result;
