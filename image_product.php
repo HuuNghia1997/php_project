@@ -26,6 +26,16 @@ class imageProduct
             return $this->result;
         }
     }
+        // GET one
+        public function getImageBills()
+        {
+            $sqlQuery = "SELECT *  FROM " . $this->db_table . " WHERE hinhmon.Mon_id   =" . $this->id;
+    
+            $this->result = $this->db->query($sqlQuery);
+            if ($this->db->affected_rows > 0) {
+                return $this->result;
+            }
+        }
     // GET ALL
     public function getImage()
     {
