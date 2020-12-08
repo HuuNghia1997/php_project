@@ -9,8 +9,9 @@ $size = isset($_GET['size']) ? $_GET['size'] : 10;
 $page = isset($_GET['page']) ?  $_GET['page'] : 0;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : null;
 $items = new Product($db, $size, $page, $keyword);
-$records = $items->getProducts();
-$itemCount = $records->num_rows;
+$results  = $items->getProducts();
+$itemCount = $results[0];
+$records = $results[1];
 if ($itemCount > 0) {
     $billsArr = array();
     $billsArr["body"] = array();

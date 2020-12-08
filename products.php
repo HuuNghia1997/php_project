@@ -27,16 +27,23 @@ class Product
     // GET ALL
     public function getProducts()
     {
+        $this->results = array();
+
+        $sqlQueryCount = $this->db->query("SELECT count(*) as total from " . $this->db_table . "");
+        $data = $sqlQueryCount->fetch_assoc();
+        array_push($this->results,  $data['total']);
         if ($this->keyword != null) {
             $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE  mon.TenMon like '%" . $this->keyword . "%' AND hinhmon.is_main = 1
             ORDER BY mon.Mon_id DESC LIMIT " . $this->size . " OFFSET " . $this->page . "";
             $this->result = $this->db->query($sqlQuery);
-            return $this->result;
+            array_push($this->results,  $this->result);
+            return $this->results;
         } else {
             $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE hinhmon.is_main = 1
             ORDER BY mon.Mon_id DESC LIMIT " . $this->size . " OFFSET " . $this->page . "";
             $this->result = $this->db->query($sqlQuery);
-            return $this->result;
+            array_push( $this->results,  $this->result);
+            return $this->results;
         }
     }
     //get one
