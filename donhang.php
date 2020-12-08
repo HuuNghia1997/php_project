@@ -25,7 +25,27 @@ class Bills
         $this->size = $size;
         $this->keyword = $keyword;
     }
-
+    // GET ALL Date
+    public function getSumbillsDate()
+    {
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as ngaydat FROM " . $this->db_table . " GROUP BY DATE(donhang.NgayDat) ORDER BY Date(donhang.NgayDat) DESC;";
+        $this->result = $this->db->query($sqlQuery);
+        return $this->result;
+    }
+    // GET ALL Month
+    public function getSumbillsMount()
+    {
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as thang FROM " . $this->db_table . " GROUP BY MONTH(donhang.NgayDat) ORDER BY MONTH(donhang.NgayDat) DESC;";
+        $this->result = $this->db->query($sqlQuery);
+        return $this->result;
+    }
+    // GET ALL Month
+    public function getSumbillsYear()
+    {
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as nam FROM " . $this->db_table . " GROUP BY YEAR(donhang.NgayDat) ORDER BY YEAR(donhang.NgayDat) DESC;";
+        $this->result = $this->db->query($sqlQuery);
+        return $this->result;
+    }
 
     // GET ALL
     public function getBills()
