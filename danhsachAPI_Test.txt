@@ -40,3 +40,8 @@ gửi form-data: image và Mon_id
 hàm put: http://localhost/huunghia/phpAdmin/update_image.php
 gửi form-data: image và HinhMon_id
 delete: http://localhost/huunghia/phpAdmin/delete_image.php?id=26
+
+thống kê:
+theo ngày: http://localhost/huunghia/phpAdmin/read_data_date.php
+theo tháng: http://localhost/huunghia/phpAdmin/read_data_month.php
+theo năm: http://localhost/huunghia/phpAdmin/read_data_year.php
