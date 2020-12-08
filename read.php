@@ -9,8 +9,11 @@ $size = isset($_GET['size']) ? $_GET['size'] : 10;
 $page = isset($_GET['page']) ?  $_GET['page'] : 0;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : null;
 $items = new Bills($db, $size, $page, $keyword);
-$records = $items->getBills();
-$itemCount = $records->num_rows;
+$results = $items->getBills();
+$itemCount = $results[0];
+$records = $results[1];
+// echo $itemCount;
+// $itemCount = $records->num_rows;
 if ($itemCount > 0) {
     $billsArr = array();
     $billsArr["body"] = array();

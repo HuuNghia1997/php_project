@@ -19,10 +19,12 @@ if ($itemCount > 0) {
     $billsArr = array();
     $billsArr["body"] = array();
     $billsArr["itemCount"] = $itemCount;
+    $billDetail;
     while ($row = $records->fetch_assoc()) {
-        array_push($billsArr["body"], $row);
+        array_push($billsArr, $row);
+        $billDetail = $row;
     }
-    echo json_encode($billsArr);
+    echo json_encode($billDetail);
 } else {
     http_response_code(404);
     echo json_encode(

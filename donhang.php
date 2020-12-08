@@ -30,24 +30,38 @@ class Bills
     // GET ALL
     public function getBills()
     {
-        if ($this->keyword !== null) {
-            $sqlQuery = "SELECT *
-            FROM " . $this->db_table . " WHERE  donhang.TenKhachHang= '" . $this->keyword . "' LIMIT " . $this->size . " OFFSET " . $this->page . "
+        $this->results = array();
+
+        $sqlQueryCount = $this->db->query("SELECT count(*) as total from ". $this->db_table."");
+        $data = $sqlQueryCount->fetch_assoc();
+        array_push( $this->results,  $data['total']);
+        if ($this->keyword !== null && $this->keyword != "") {
+            $this->keyword = "%".$this->keyword."%";
+            $sqlQuery = "SELECT dh.DonHang_id, dh.TongTien,dh.NgayDat,dh.TrangThai,dh.NhanVien_id,dh.TenKhachHang, dh.KhachHang_id, dh.KhuyenMai_id,kh.HoTen
+            FROM " . $this->db_table . " dh JOIN khachhang kh ON dh.KhachHang_id=kh.KhachHang_id
+            WHERE  dh.TenKhachHang like '" . $this->keyword . "' LIMIT " . $this->size . " OFFSET " . $this->page . "
             ";
             $this->result = $this->db->query($sqlQuery);
-            return $this->result;
+            array_push( $this->results,  $this->result);
+            return $this->results;
         } else {
-            $sqlQuery = "SELECT *
-         FROM " . $this->db_table . " LIMIT " . $this->size . " OFFSET " . $this->page . "
+            $sqlQuery = "SELECT dh.DonHang_id, dh.TongTien,dh.NgayDat,dh.TrangThai,dh.NhanVien_id,dh.TenKhachHang, dh.KhachHang_id, dh.KhuyenMai_id,kh.HoTen
+            FROM " . $this->db_table . " dh JOIN khachhang kh ON dh.KhachHang_id=kh.KhachHang_id 
+            LIMIT " . $this->size . " OFFSET " . $this->page . "
          ";
             $this->result = $this->db->query($sqlQuery);
-            return $this->result;
+            array_push( $this->results,  $this->result);
+            return $this->results;
         }
     }
     //get one
     public function getOneBill()
     {
-        $sqlQuery = "SELECT *  FROM " . $this->db_table . " WHERE DonHang_id = " . $this->id;
+        $sqlQuery = "SELECT dh.DonHang_id, dh.TongTien,dh.NgayDat,dh.TrangThai,dh.NhanVien_id,dh.TenKhachHang, dh.KhachHang_id, dh.KhuyenMai_id,nv.HoTen as TenNhanVien,kh.HoTen,km.Gia 
+        FROM " . $this->db_table . " dh JOIN nhanvien nv ON dh.NhanVien_id=nv.NhanVien_id
+        JOIN khachhang kh ON dh.KhachHang_id=kh.KhachHang_id
+        LEFT JOIN khuyemai km ON dh.KhuyenMai_id=km.KhuyenMai_id 
+        WHERE DonHang_id = " . $this->id;
         $this->result = $this->db->query($sqlQuery);
         if ($this->db->affected_rows > 0) {
             return $this->result;
