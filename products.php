@@ -27,14 +27,14 @@ class Product
     // GET ALL
     public function getProducts()
     {
-        if ($this->keyword !== null) {
-            $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE  mon.TenMon like '%" . $this->keyword . "%' LIMIT " . $this->size . " OFFSET " . $this->page . "
-            ";
+        if ($this->keyword != null) {
+            $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE  mon.TenMon like '%" . $this->keyword . "%' AND hinhmon.is_main = 1
+            ORDER BY mon.Mon_id DESC LIMIT " . $this->size . " OFFSET " . $this->page . "";
             $this->result = $this->db->query($sqlQuery);
             return $this->result;
         } else {
-            $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id LIMIT " . $this->size . " OFFSET " . $this->page . "
-         ";
+            $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE hinhmon.is_main = 1
+            ORDER BY mon.Mon_id DESC LIMIT " . $this->size . " OFFSET " . $this->page . "";
             $this->result = $this->db->query($sqlQuery);
             return $this->result;
         }
@@ -42,7 +42,7 @@ class Product
     //get one
     public function getOnePrduct()
     {
-        $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM hinhmon INNER JOIN mon ON mon.Mon_id=hinhmon.Mon_id WHERE mon.Mon_id=" . $this->id;
+        $sqlQuery = "SELECT hinhmon.HinhMon_id,hinhmon.IMG,mon.Mon_id,mon.TenMon,mon.MoTa,mon.Gia,mon.LoaiMon_id FROM mon LEFT JOIN hinhmon ON mon.Mon_id=hinhmon.Mon_id WHERE mon.Mon_id=" . $this->id;
         $this->result = $this->db->query($sqlQuery);
         if ($this->db->affected_rows > 0) {
             return $this->result;

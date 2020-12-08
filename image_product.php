@@ -40,11 +40,11 @@ class imageProduct
     {
         // sanitize
         $this->IMG = htmlspecialchars(strip_tags($this->IMG));
-        $target_dir = "http://localhost/hinhanh/";
+        $target_dir = "hinhanh/";
         $target_file = $target_dir . $this->IMG;
         $this->Mon_id = htmlspecialchars(strip_tags($this->Mon_id));
         // image file directory
-        $target = "C:/xampp/htdocs/hinhanh/" . basename($this->IMG);
+        $target = "D:/xampp/htdocs/std_project/php_project/hinhanh/" . basename($this->IMG);
         $sqlQuery = "INSERT INTO
             " . $this->db_table . " SET hinhmon.IMG = '" . $target_file . "',
             hinhmon.Mon_id = '" . $this->Mon_id . "'
@@ -59,10 +59,10 @@ class imageProduct
     public function updateImage()
     {
         $this->IMG = htmlspecialchars(strip_tags($this->IMG));
-        $target_dir = "http://localhost/hinhanh/";
+        $target_dir = "hinhanh/";
         $target_file = $target_dir . $this->IMG;
         // image file directory
-        $target = "C:/xampp/htdocs/hinhanh/" . basename($this->IMG);
+        $target = "D:/xampp/htdocs/std_project/php_project/hinhanh/" . basename($this->IMG);
         $sqlQuery = "UPDATE  " . $this->db_table . " SET IMG = '" . $target_file . "'
            WHERE HinhMon_id  = " . $this->id;
         $this->db->query($sqlQuery);
