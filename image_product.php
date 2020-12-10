@@ -10,6 +10,7 @@ class imageProduct
     public $id;
     public $IMG;
     public $Mon_id;
+    public $is_main=0;
     // Db dbection
     public function __construct($db, $tmp_name)
     {
@@ -54,10 +55,18 @@ class imageProduct
         $target_file = $target_dir . $this->IMG;
         $this->Mon_id = htmlspecialchars(strip_tags($this->Mon_id));
         // image file directory
-        $target = "D:/xampp/htdocs/std_project/php_project/hinhanh/" . basename($this->IMG);
+        $target = "./hinhanh/" . basename($this->IMG);
+
+        $sqlQueryCount = $this->db->query("SELECT count(*) as total from hinhmon 
+        WHERE hinhmon.is_main = 1 AND hinhmon.Mon_id = '" . $this->Mon_id . "'");
+        $data = $sqlQueryCount->fetch_assoc();
+        if ($data['total'] == 0){
+            $this->is_main = 1;
+        }
+
         $sqlQuery = "INSERT INTO
             " . $this->db_table . " SET hinhmon.IMG = '" . $target_file . "',
-            hinhmon.Mon_id = '" . $this->Mon_id . "'
+            hinhmon.Mon_id = '" . $this->Mon_id . "', hinhmon.is_main = '" . $this->is_main . "'
              ";
         $this->db->query($sqlQuery);
         if ($this->db->affected_rows > 0 && move_uploaded_file($this->tmp_name, $target)) {

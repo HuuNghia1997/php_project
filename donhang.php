@@ -55,11 +55,14 @@ class Bills
         $sqlQueryCount = $this->db->query("SELECT count(*) as total from ". $this->db_table."");
         $data = $sqlQueryCount->fetch_assoc();
         array_push( $this->results,  $data['total']);
+        $this->page = $this->page*10;
         if ($this->keyword !== null && $this->keyword != "") {
             $this->keyword = "%".$this->keyword."%";
             $sqlQuery = "SELECT dh.DonHang_id, dh.TongTien,dh.NgayDat,dh.TrangThai,dh.NhanVien_id,dh.TenKhachHang, dh.KhachHang_id, dh.KhuyenMai_id,kh.HoTen
             FROM " . $this->db_table . " dh JOIN khachhang kh ON dh.KhachHang_id=kh.KhachHang_id
-            WHERE  dh.TenKhachHang like '" . $this->keyword . "' LIMIT " . $this->size . " OFFSET " . $this->page . "
+            WHERE  dh.TenKhachHang like '" . $this->keyword . "' 
+            ORDER BY dh.DonHang_id DESC
+            LIMIT " . $this->size . " OFFSET " . $this->page . "
             ";
             $this->result = $this->db->query($sqlQuery);
             array_push( $this->results,  $this->result);
@@ -67,6 +70,7 @@ class Bills
         } else {
             $sqlQuery = "SELECT dh.DonHang_id, dh.TongTien,dh.NgayDat,dh.TrangThai,dh.NhanVien_id,dh.TenKhachHang, dh.KhachHang_id, dh.KhuyenMai_id,kh.HoTen
             FROM " . $this->db_table . " dh JOIN khachhang kh ON dh.KhachHang_id=kh.KhachHang_id 
+            ORDER BY dh.DonHang_id DESC
             LIMIT " . $this->size . " OFFSET " . $this->page . "
          ";
             $this->result = $this->db->query($sqlQuery);

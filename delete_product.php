@@ -19,6 +19,6 @@ if($item->deleteProduct()){
     );
 } else{
     echo json_encode(
-        array("message" => "Xóa thành công")
+        array("message" => "Xóa không thành công")
     );
 }
