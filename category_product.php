@@ -26,13 +26,13 @@ class CategoryProduct
     {
         if ($this->keyword !== null) {
             $sqlQuery = "SELECT *
-            FROM " . $this->db_table . " WHERE  loaimon.TenLoaiMon like '%" . $this->keyword . "%' LIMIT " . $this->size . " OFFSET " . $this->page . "
+            FROM " . $this->db_table .  "
             ";
             $this->result = $this->db->query($sqlQuery);
             return $this->result;
         } else {
             $sqlQuery = "SELECT *
-         FROM " . $this->db_table . " LIMIT " . $this->size . " OFFSET " . $this->page . "
+         FROM " . $this->db_table ."
          ";
             $this->result = $this->db->query($sqlQuery);
             return $this->result;
