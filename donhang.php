@@ -28,21 +28,21 @@ class Bills
     // GET ALL Date
     public function getSumbillsDate()
     {
-        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as ngaydat FROM " . $this->db_table . " GROUP BY DATE(donhang.NgayDat) ORDER BY Date(donhang.NgayDat) DESC;";
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as ngaydat FROM " . $this->db_table . " GROUP BY DATE(donhang.NgayDat) ORDER BY Date(donhang.NgayDat) ASC;";
         $this->result = $this->db->query($sqlQuery);
         return $this->result;
     }
     // GET ALL Month
     public function getSumbillsMount()
     {
-        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as thang FROM " . $this->db_table . " GROUP BY MONTH(donhang.NgayDat) ORDER BY MONTH(donhang.NgayDat) DESC;";
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as thang FROM " . $this->db_table . " GROUP BY MONTH(donhang.NgayDat) ORDER BY MONTH(donhang.NgayDat) ASC;";
         $this->result = $this->db->query($sqlQuery);
         return $this->result;
     }
     // GET ALL Month
     public function getSumbillsYear()
     {
-        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as nam FROM " . $this->db_table . " GROUP BY YEAR(donhang.NgayDat) ORDER BY YEAR(donhang.NgayDat) DESC;";
+        $sqlQuery = "SELECT SUM(TongTien) as tongtien, DATE(NgayDat)as nam FROM " . $this->db_table . " GROUP BY YEAR(donhang.NgayDat) ORDER BY YEAR(donhang.NgayDat) ASC;";
         $this->result = $this->db->query($sqlQuery);
         return $this->result;
     }
@@ -151,5 +151,14 @@ class Bills
             return true;
         }
         return false;
+    }
+
+    function statisticByCustomer()
+    {
+        $sqlQuery = "SELECT count(*) as numofbill, khachhang.HoTen FROM " . $this->db_table . " 
+        JOIN khachhang ON donhang.KhachHang_id=khachhang.KhachHang_id
+        GROUP BY YEAR(donhang.KhachHang_id);";
+        $this->result = $this->db->query($sqlQuery);
+        return $this->result;
     }
 }
